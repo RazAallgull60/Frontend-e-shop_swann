@@ -1,6 +1,5 @@
 import React from "react";
 import "./Product.scss";
-import prod from "../../../assets/products/earbuds-prod-1.webp"
 
 const Product = ({name, price, image}) => {
     console.log("🚀 ~ file: Product.jsx:6 ~ Product ~ name:", name)

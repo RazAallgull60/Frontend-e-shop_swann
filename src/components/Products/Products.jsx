@@ -8,26 +8,20 @@ const Products = ({products = [], innerPage, headingText}) => {
         <div  className="products-container">
             {!innerPage && <div className="sec-heading">{headingText}</div>}
 
-        <div style={{
-            display: "flex",
-            flexWrap: "wrap",
-            flexDirection: "row",
-        }}>
-
-        {products.map((product) => (
-            <Product product={product} image={
-                product?.attributes?.img?.data[0]?.attributes?.url
-            } name={product?.attributes?.title} price={product?.attributes?.price} />
-        ))}
+            <div style={{
+                display: "flex",
+                flexWrap: "wrap",
+                flexDirection: "row",
+            }}>
+                <div className="products">
+                    {products.map((product) => (
+                        <Product product={product} image={
+                            product?.attributes?.img?.data[0]?.attributes?.url
+                        } name={product?.attributes?.title} price={product?.attributes?.price} />
+                    ))}
+                </div>
+            </div>
         </div>
-        </div>
-
-        // <div className="products-container">
-        //     {!innerPage && <div className="sec-heading">{headingText}</div>}
-        //     <div className="products">
-        //         <Product />
-        //     </div>
-        // </div>
     );
 };
 
