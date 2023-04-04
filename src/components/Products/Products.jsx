@@ -17,7 +17,7 @@ const Products = ({products = [], innerPage, headingText}) => {
                     {products.map((product) => (
                         <Product product={product} image={
                             product?.attributes?.img?.data[0]?.attributes?.url
-                        } name={product?.attributes?.title} price={product?.attributes?.price} />
+                        } name={product?.attributes?.title} price={product?.attributes?.price} id={product?.id} />
                     ))}
                 </div>
             </div>

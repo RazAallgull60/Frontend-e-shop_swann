@@ -2,20 +2,39 @@ import React from "react";
 import "./SingleProduct.scss";
 import RelatedProducts from "./RelatedProducts/RelatedProducts"
 import { FaFacebookF, FaTwitter, FaInstagram, FaPinterest, FaCartPlus, FaFacebookMessenger, FaWhatsapp } from "react-icons/fa";
-import prod from "../../assets/products/earbuds-prod-1.webp"
+import { useParams } from "react-router-dom";
+import useFetch from "../../hooks/useFetch";
+import { useState } from "react";
 
 const SingleProduct = () => {
+    const params = useParams()
+    const [quantity, setQuantity] = useState({})
+
+    const product = useFetch(`/api/products/${params.id}?populate=*`);
+
+    // useEffect( () => {
+    //     setProd (product)
+    //         return () => {
+    //     }
+    // }, [product]);
+
+    
+
+    console.log(product?.data?.attributes?.img?.data[0]?.attributes?.url)
+
     return (
         <div className="single-product-main-content">
             <div className="layout">
                 <div className="single-product-page">
                     <div className="letf">
-                        <img src={prod} alt="" />
+                        <img src={
+                            `http://localhost:1337${product?.data?.attributes?.img?.data[0]?.attributes?.url}`
+                        } alt="" />
                     </div>
                     <div className="right">
-                        <span className="name">Nom du produit</span>
-                        <span className="price">Prix</span>
-                        <span className="desc">Description du produit</span>
+                        <span className="name">{product?.data?.attributes?.title}</span>
+                        <span className="price">{product?.data?.attributes?.price} &#8364;</span>
+                        <span className="desc">{product?.data?.attributes?.description}</span>
                         <div className="cart-buttons">
                             <div className="quantity-buttons">
                                 <span>-</span>
@@ -29,9 +48,15 @@ const SingleProduct = () => {
                         </div>
                         <span className="divider"/>
                         <div className="info-items">
-                            <span className="text-bold">Catérogie :
-                                <span>Casques audio</span>
+                            <span className="text-bold">Catérogie : {""}
+                                {product?.data?.attributes?.categories?.data.map((category) => (
+                                
+                                    <span>{category?.attributes?.title}</span>
+
+                                ))}
                             </span>
+                            <br></br>
+                            <br></br>
                             <span className="text-bold">Partager sur :
                                 <span className="social-icons">
                                     <FaFacebookF size={16} />
@@ -46,7 +71,8 @@ const SingleProduct = () => {
                         </div>
                     </div>
                 </div>
-                <RelatedProducts />
+                <RelatedProducts 
+                category = {product?.data?.attributes?.categories?.data[0].id} />
             </div>
         </div>
     );
