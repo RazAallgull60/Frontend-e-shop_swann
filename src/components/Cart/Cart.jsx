@@ -31,7 +31,7 @@ const Cart = ({ setShowCart }) => {
                             <span className="text total">666 &#8364;</span>
                         </div>
                         <div className="button">
-                            <button className="checkout-cta">Passer ma commande</button>
+                            <button className="checkout-cta">Payer mon panier</button>
                         </div>
                     </div>                
                 </>
