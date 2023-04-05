@@ -8,17 +8,20 @@ import { useState } from "react";
 
 const SingleProduct = () => {
     const params = useParams()
-    const [quantity, setQuantity] = useState({})
+    const [quantity, setQuantity] = useState(1);
 
-    const product = useFetch(`/api/products/${params.id}?populate=*`);
+    const increment = () => {
+        setQuantity((prevState) => prevState + 1);
+    };
 
-    // useEffect( () => {
-    //     setProd (product)
-    //         return () => {
-    //     }
-    // }, [product]);
+    const decrement = () => {
+        setQuantity((prevState) => {
+            if(prevState === 1) return 1
+            return prevState - 1;
+        });
+    };
 
-    
+    const product = useFetch(`/api/products/${params.id}?populate=*`);    
 
     console.log(product?.data?.attributes?.img?.data[0]?.attributes?.url)
 
@@ -37,9 +40,9 @@ const SingleProduct = () => {
                         <span className="desc">{product?.data?.attributes?.description}</span>
                         <div className="cart-buttons">
                             <div className="quantity-buttons">
-                                <span>-</span>
-                                <span>9</span>
-                                <span>+</span>
+                                <span onClick={decrement}>-</span>
+                                <span>{quantity}</span>
+                                <span onClick={increment}>+</span>
                             </div>
                             <button className="add-to-cart-button">  
                                 <FaCartPlus size={20} />
@@ -49,10 +52,8 @@ const SingleProduct = () => {
                         <span className="divider"/>
                         <div className="info-items">
                             <span className="text-bold">Catérogie : {""}
-                                {product?.data?.attributes?.categories?.data.map((category) => (
-                                
+                                {product?.data?.attributes?.categories?.data.map((category) => (                                
                                     <span>{category?.attributes?.title}</span>
-
                                 ))}
                             </span>
                             <br></br>
@@ -65,7 +66,6 @@ const SingleProduct = () => {
                                     <FaFacebookMessenger size={16} />
                                     <FaWhatsapp size={16} />
                                     <FaPinterest size={16} />
-
                                 </span>
                             </span>                            
                         </div>
