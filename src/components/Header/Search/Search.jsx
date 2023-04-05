@@ -31,7 +31,9 @@ const Search = ({setShowSearch}) => {
             <div className="search-result-content">
                 {product?.data[0]?.attributes.map(item => (
                     <div key={item.id} className="search-results">
-                        <div className="search-result-item">
+                        <div className="search-result-item" onClick={() => {
+                            navigate ("/product/" + item.id)
+                        }}>
                             <div className="img-container">
                                 <img src={item.data?.attributes?.img?.data[0]?.attributes?.url} alt="" />
                             </div>
