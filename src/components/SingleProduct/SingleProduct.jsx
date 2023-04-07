@@ -42,7 +42,7 @@ const SingleProduct = () => {
                         <div className="cart-buttons">
                             <div className="quantity-buttons">
                                 <span onClick={decrement}>-</span>
-                                <span>{quantity}</span>
+                                <span>{quantity}</span> 
                                 <span onClick={increment}>+</span>
                             </div>
                             <button className="add-to-cart-button" onClick={() => {handleAddToCart(product?.data, quantity); setQuantity(1)}}> 
